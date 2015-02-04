@@ -3,8 +3,8 @@ Contributors: georgestephanis
 Donate link: https://www.charitywater.org/donate
 Tags: Theme, Content Width
 Requires at least: 2.7
-Tested up to: 3.6
-Stable tag: 1.0
+Tested up to: 4.1
+Stable tag: 1.0.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -21,6 +21,9 @@ Occasionally, themes forget to set the `$content_width` variable in functions.ph
 3. There is no step three!
 
 == Changelog ==
+
+= 1.0.1 =
+* Validate width values to avoid unlikely security vulnerabilities.
 
 = 1.0 =
 * Initial release.

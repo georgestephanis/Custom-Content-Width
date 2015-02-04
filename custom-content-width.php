@@ -4,7 +4,7 @@
  * Plugin URI: http://wordpress.org/plugins/custom-content-width/
  * Description: Adds a 'Custom Content Width' setting to the Settings > Media screen, to let users override their theme's content width.
  * Author: George Stephanis
- * Version: 1.0
+ * Version: 1.0.1
  * Author URI: http://stephanis.info/
  */
 
@@ -24,7 +24,7 @@ class Stephanis_Custom_Content_Width {
 			$this->original_content_width = $content_width;
 
 		if( $custom_content_width = get_option( 'custom_content_width' ) )
-			$content_width = $custom_content_width;
+			$content_width = absint( $custom_content_width );
 	}
 
 	function register_settings() {
@@ -36,13 +36,13 @@ class Stephanis_Custom_Content_Width {
 	function custom_content_width_cb() {
 		$value = get_option( 'custom_content_width' );
 		?>
-		<input type="number" class="small-text" min="0" id="custom_content_width" name="custom_content_width" value="<?php echo $value ? $value : ''; ?>" />
+		<input type="number" class="small-text" min="0" id="custom_content_width" name="custom_content_width" value="<?php echo $value ? absint( $value ) : ''; ?>" />
 		<label for="custom_content_width">px</label>
 		<?php if( ! empty( $this->original_content_width ) ): ?>
 			<?php if( $value ): ?>
 				<small><a href="javascript:;" onclick="jQuery('#custom_content_width').val('');"><?php _e('clear custom value', 'custom_content_width'); ?></a></small>
 			<?php endif; ?>
-			<br /><em><?php printf( __('Your theme&rsquo;s default content width is %s pixels.', 'custom_content_width'), $this->original_content_width ); ?></em>
+			<br /><em><?php printf( __('Your theme&rsquo;s default content width is %s pixels.', 'custom_content_width'), absint( $this->original_content_width ) ); ?></em>
 		<?php endif;
 	}
 }
